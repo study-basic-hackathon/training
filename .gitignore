@@ -1,5 +1,7 @@
 # Python
 __pycache__/
+backend/__pycache__/
+backend/backend_project/__pycache__/
 *.pyc
 *.pyo
 *.pyd
