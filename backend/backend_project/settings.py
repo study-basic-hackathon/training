@@ -68,7 +68,7 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../frontend'), # frontend/static を指定
+    os.path.join(BASE_DIR, '../frontend'), # frontend を指定
 ]
 
 WSGI_APPLICATION = 'backend_project.wsgi.application'
