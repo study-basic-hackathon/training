@@ -7,8 +7,8 @@
 `npm install`
 
 ### 手順2: ローカルサーバーを立てる
-[バックエンド] python ./backend/manage.py runserver 8080
-[フロントエンド] npm run serve
+[バックエンド] (プロジェクトルート)/backend　で　python manage.py runserver 8080
+[フロントエンド] (プロジェクトルート)/frontend　で　npm run serve
 
 ### 手順3: ブラウザで確認
 `http://localhost:8000` にアクセスするとVUEのページが見られる
