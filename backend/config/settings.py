@@ -114,11 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization など既存のセクションの後に追加
 # --- CORS Settings ---
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",    # Vue.js 開発サーバーのデフォルトポート (Vue CLIの場合)
-    "http://127.0.0.1:8080",
-    # もし別のポートでVue.jsを動かすなら、ここに追加してください
-    "http://localhost:8000",   # Django のサーバーと被るから追加
-    "http://127.0.0.1:8000",   # Django のサーバーと被るから追加
+    "http://localhost:5173",    # React.js 開発サーバーのデフォルトポート
+    "http://127.0.0.1:5173",
 ]
 
 LANGUAGE_CODE = 'ja-jp'
