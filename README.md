@@ -17,3 +17,4 @@
 `http://localhost:5173/api/training` にアクセスするとバックエンドAPIのエントリーポイントをのぞける  
 
 バックエンド側では　`http://localhost:8080/api/training`  
+
