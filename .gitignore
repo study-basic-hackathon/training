@@ -1,98 +1,41 @@
-# Python
+# .gitignore (プロジェクトルート)
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Python / Django specific
+# Python 仮想環境
+venv/
+.venv/
+env/
+
+# Python cache files
 __pycache__/
-backend/__pycache__/
-backend/backend_project/__pycache__/
-backend/training_app/__pycache__/ # 追加
 *.pyc
 *.pyo
-*.pyd
-.python-version
-.venv/  # ← これがルート直下の .venv を無視する記述です
-venv/   # ← これもルート直下の venv を無視する記述です
-backend/.venv/
-backend/venv/
-backend/instance/
-backend/_build/
-backend/build/
-backend/develop-eggs/
-backend/dist/
-backend/downloads/
-backend/eggs/
-backend/lib64/
-backend/lib/
-backend/parts/
-backend/sdist/
-backend/var/
-backend/wheels/
-backend/pip-log.txt
-backend/pip-delete-this-directory.txt
-backend/.tox/
-backend/.coverage
-backend/.coverage.*
-backend/.cache
-backend/nosetests.xml
-backend/coverage.xml
-backend/*.egg-info
-backend/.installed.cfg
-backend/*.pth
-backend/pylint-output.txt
-backend/django_debug_toolbar/
 
-# Django specific (within backend)
-backend/*.log
-backend/*.pot
-backend/media
-backend/static
-backend/staticfiles/
-backend/collectstatic/
+# SQLite database (開発用DB)
+db.sqlite3
+*.sqlite3-journal
 
-# Environments
-.env
-.env.local
-.env.development
-.env.development.local
-.env.test
-.env.test.local
-.env.production
-.env.production.local
+# Django generated files
+media/  # アップロードファイル用フォルダ
+static/ # 静的ファイル収集用フォルダ
+*.log   # ログファイル
 
-# Byte-compiled / optimized / DLL files (redundant but safe)
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions (redundant but safe)
-*.so
-
-# Distribution / packaging (redundant but safe)
-backend/build/
-backend/dist/
-backend/sdist/
-backend/*.egg-info/
-backend/.installed.cfg
-backend/*.pth
-backend/*.egg
-
-# Virtual environment (within backend)
-backend/.venv/
-backend/venv/
-
-# Frontend related
-frontend/node_modules/
-frontend/build/
-frontend/dist/
-frontend/.cache/
-
-# VS Code
+# IDE-specific files (e.g., VS Code)
 .vscode/
-
-# PyCharm
 .idea/
 
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
+# Node.js / Frontend specific
+# Node.js 依存関係 (frontend/node_modules は各frontendの.gitignoreで管理)
+# ただし、誤ってルートに作られた場合のため
+node_modules/
 
-# Other common files and directories
-*.DS_Store
-Thumbs.db
+# Build outputs (frontend/dist は各frontendの.gitignoreで管理)
+# ただし、誤ってルートに作られた場合のため
+dist/
+
+# その他
+.env # 環境変数ファイル

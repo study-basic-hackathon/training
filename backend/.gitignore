@@ -1,0 +1,31 @@
+# backend/.gitignore
+
+# Python / Django specific
+# Python 仮想環境 (backend/venv はルートの.gitignoreでも指定済みですが、念のため)
+venv/
+.venv/
+env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite database (開発用DB)
+db.sqlite3
+*.sqlite3-journal
+
+# Django generated files
+media/  # アップロードファイル用フォルダ
+static/ # 静的ファイル収集用フォルダ
+*.log   # ログファイル
+
+# Local settings (本番環境など、環境によって異なる設定をローカルに持つ場合)
+local_settings.py
+
+# IDE-specific files (e.g., VS Code)
+.vscode/
+.idea/
+
+# 環境変数ファイル
+.env
