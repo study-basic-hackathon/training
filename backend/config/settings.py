@@ -38,12 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
+    'corsheaders',      # ★追加: CORS ヘッダーミドルウェアを有効にするため
+        #CORS (Cross-Origin Resource Sharing) の設定不足: フロントエンドの Vue.js アプリケーションが動作するドメイン（通常 http://localhost:8080 や http://127.0.0.1:8080）から、バックエンドの Django API (http://127.0.0.1:8080) にアクセスするためには、CORS の設定が必要です。これが不足していると、ブラウザのセキュリティ機能によって通信がブロックされます。
+    'api.training',     # ★追加: あなたのDjangoアプリケーションを認識させるため
+    # 'api', # これはもし 'api' という名前のアプリが別に存在するなら残しますが、
+             # ほとんどの場合 'api.training' のみで十分です。
+             # 状況に応じて残すか削除するか判断してください。
+             # 一般的には、アプリは 'api.training' のようにフルパスで指定します。
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # ★追加: これを CommonMiddleware の前に置く
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,6 +110,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
+
+# Internationalization など既存のセクションの後に追加
+# --- CORS Settings ---
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",    # Vue.js 開発サーバーのデフォルトポート (Vue CLIの場合)
+    "http://127.0.0.1:8080",
+    # もし別のポートでVue.jsを動かすなら、ここに追加してください
+    "http://localhost:8000",   # Django のサーバーと被るから追加
+    "http://127.0.0.1:8000",   # Django のサーバーと被るから追加
+]
 
 LANGUAGE_CODE = 'ja-jp'
 
