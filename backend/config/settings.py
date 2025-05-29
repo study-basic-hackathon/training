@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,7 +64,11 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # BASE_DIR (backend) から上の親ディレクトリ (プロジェクトルート) に戻り、
+            # そこから 'frontend', 'dist' へと辿るのが正しいパスになります。
+            os.path.join(BASE_DIR.parent, 'frontend', 'dist'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +136,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# 追加: ViteでビルドされたReactアプリの出力ディレクトリを指定
+# BASE_DIR は manage.py がある backend ディレクトリを指す
+# プロジェクトルートにいるとして、frontend/dist を指すように設定
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR.parent, 'frontend', 'dist'),
+    # 例: /path/to/your/project/frontend/dist を指す
+]
+
+# プロダクション環境で静的ファイルを収集する場所
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# 解説:
+# STATIC_ROOT は、python manage.py collectstatic コマンドを実行した際に、全ての静的ファイル（Djangoアプリの静的ファイル、adminの静的ファイル、そしてReactのビルド済みファイル）がここに集められる場所です。
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
