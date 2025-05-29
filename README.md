@@ -1,7 +1,10 @@
 ### 手順1（必要なら）: 不足しているモジュールをインストールする
 
-`pip install djangorestframework`  
-`pip install django-cors-headers`  
+~~`pip install djangorestframework`~~  
+~~`pip install django-cors-headers`~~  
+仮想環境をアクティベートする  
+(プロジェクトルート)/backendで  
+`pip install -r requirements.txt`  
 
 (プロジェクトルート)/frontendで  
 `npm install`  
