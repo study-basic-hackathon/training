@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+
+// // 各ページコンポーネント (後で作成)
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+// import PlanCreatePage from './pages/PlanCreatePage';
+// import PlanResultPage from './pages/PlanResultPage';
+
+// // 共通コンポーネント (後で作成)
+import Header from './components/common/Header';
+// import Footer from './components/common/Footer';
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (<>
+        <Router>
+            <Header />
+
+            {/* 各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置) */}
+            <nav style={{ width: '100%', padding: '10px', backgroundColor: '#f0f0f0' }}>
+                <p style={{ color: '#333' }}>各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置)</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Link to="/">Login (Top)</Link>
+                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/create">Create Plan</Link>
+                    <Link to="/result">Plan Result</Link>
+                </div>
+            </nav>
+            {/* ルートの定義 */}
+            <Routes>
+                <Route path="/" element={<LoginPage />} /> 初期表示のルート
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+                {/* <Route path="/create" element={<PlanCreatePage />} /> */}
+                {/* <Route path="/result" element={<PlanResultPage />} /> */}
+                {/* その他のルートがあれば追加 */}
+            </Routes>
+
+            {/* <Footer /> */}
+        </Router>
+    </>)
 }
 
 export default App
