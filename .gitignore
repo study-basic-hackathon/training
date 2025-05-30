@@ -23,6 +23,7 @@ db.sqlite3
 media/  # アップロードファイル用フォルダ
 static/ # 静的ファイル収集用フォルダ
 *.log   # ログファイル
+backend/staticfiles/  # Django collectstaticで生成される静的ファイル
 
 # IDE-specific files (e.g., VS Code)
 .vscode/
