@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useFetchData from '../hooks/useFetchData.js'
 import { useNavigate } from 'react-router-dom'
 import './DashboardPage.css'
@@ -8,49 +8,194 @@ import './DashboardPage.css'
 const API_URL = '/api/training';
 
 const DashboardPage = () => {
-    const { data, loading, error } = useFetchData(API_URL)  // カスタムフックを使用してデータを取得
+    const { data, loading, error, fetchData } = useFetchData()  // カスタムフックを使用してデータを取得
     const navigate = useNavigate(); // useNavigateフックを使用してページ遷移を管理
 
+    // コンポーネントがマウントされたときにデータを取得
+    useEffect(() => {
+        fetchData(API_URL, { method: 'GET' }); // URLとGETメソッドを指定して呼び出す
+    }, [fetchData]); // fetchDataがメモ化されているので依存配列に含める
+    
     // APIから取得するデータの例
     const sampleData = {
         trainings: [
             {
-                id: 1,
-                name: "３か月で-5kg減量するぞ！",
-                goal: "減量",
-                excercise: "筋トレ、ランニング",
-                frequency: "月、水、金",
-                start_date: "2025-7-01",
-                end_date: "2025-9-30",
-                plan:[
-                { "date": "2025-07-01", "excersize": "<ul><li>スクワット：10回 × 3セット</li><li>プッシュアップ（膝つきでも可）：10回 × 3セット</li><li>バックエクステンション：10回 × 3セット</li><li>プランク：30秒 × 3セット</li></ul>" },
-                { "date": "2025-07-04", "excersize": "ランニング：30分" },
-                { "date": "2025-07-07", "excersize": "<ul><li>ランジ：左右各10回 × 3セット</li><li>ダンベルロウ（ペットボトルでも可）：左右各10回 × 3セット</li><li>ヒップリフト：15回 × 3セット</li><li>サイドプランク：左右各20秒 × 3セット</li></ul>" },
-                { "date": "2025-07-09", "excersize": "ランニング：30分" },
-                { "date": "2025-07-11", "excersize": "<ul><li>スクワット：12回 × 3セット</li><li>プッシュアップ：12回 × 3セット</li><li>バックエクステンション：12回 × 3セット</li><li>プランク：40秒 × 3セット</li></ul>" },
-                { "date": "2025-07-14", "excersize": "ランニング：30分" },
-                { "date": "2025-07-16", "excersize": "<ul><li>ランジ：左右各12回 × 3セット</li><li>ダンベルロウ：左右各12回 × 3セット</li><li>ヒップリフト：18回 × 3セット</li><li>サイドプランク：左右各30秒 × 3セット</li></ul>" },
-                { "date": "2025-07-18", "excersize": "ランニング：30分" },
-                { "date": "2025-07-21", "excersize": "<ul><li>スクワット：15回 × 3セット</li><li>プッシュアップ：15回 × 3セット</li><li>バックエクステンション：15回 × 3セット</li><li>プランク：50秒 × 3セット</li></ul>" },
-                { "date": "2025-07-23", "excersize": "ランニング：30分" },
-                { "date": "2025-07-25", "excersize": "<ul><li>ランジ：左右各15回 × 3セット</li><li>ダンベルロウ：左右各15回 × 3セット</li><li>ヒップリフト：20回 × 3セット</li><li>サイドプランク：左右各40秒 × 3セット</li></ul>" },
-                { "date": "2025-07-28", "excersize": "ランニング：30分" },
-                { "date": "2025-07-30", "excersize": "<ul><li>スクワット：15回 × 3セット</li><li>プッシュアップ：15回 × 3セット</li><li>バックエクステンション：15回 × 3セット</li><li>プランク：60秒 × 3セット</li></ul>" }
-                ],
-            },
-            {
                 id: 2,
-                name: "Sample Training",
-                goal: "Sample Goal",
-                frequency: "3 times a week",
-                plan: [{"date": "2025-01-01", "excersize": "Sample Exercise"}],
+                name: "3ヶ月ダイエット",
+                goal: "やせる",
+                exercise: "ランニング、水泳",
+                frequency: "月、水、金",
+                start_date: "2025-05-29",
+                end_date: "2025-08-29",
+                plan: [
+                {
+                    "date": "2025-05-29",
+                    "exercise": "<ul><li>ランニング：30分 ジョギングペース</li><li>水泳：20分 ゆっくりとしたペース</li></ul>"
+                },
+                {
+                    "date": "2025-05-31",
+                    "exercise": "<ul><li>ランニング：35分 ジョギングペース</li><li>水泳：25分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-02",
+                    "exercise": "<ul><li>ランニング：40分 ジョギングペース インターバル走30秒×3回</li><li>水泳：30分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-04",
+                    "exercise": "<ul><li>ランニング：45分 ジョギングペース インターバル走45秒×4回</li><li>水泳：35分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-06",
+                    "exercise": "<ul><li>ランニング：50分 ジョギングペース インターバル走60秒×5回</li><li>水泳：40分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-09",
+                    "exercise": "<ul><li>ランニング：40分 ジョギングペース インターバル走45秒×4回</li><li>水泳：30分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-11",
+                    "exercise": "<ul><li>ランニング：45分 ジョギングペース インターバル走60秒×5回</li><li>水泳：35分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-13",
+                    "exercise": "<ul><li>ランニング：50分 ジョギングペース インターバル走75秒×6回</li><li>水泳：40分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-16",
+                    "exercise": "<ul><li>ランニング：45分 ジョギングペース インターバル走60秒×5回</li><li>水泳：35分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-18",
+                    "exercise": "<ul><li>ランニング：50分 ジョギングペース インターバル走75秒×6回</li><li>水泳：40分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-20",
+                    "exercise": "<ul><li>ランニング：55分 ジョギングペース インターバル走90秒×7回</li><li>水泳：45分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-23",
+                    "exercise": "<ul><li>ランニング：50分 ジョギングペース インターバル走75秒×6回</li><li>水泳：40分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-25",
+                    "exercise": "<ul><li>ランニング：55分 ジョギングペース インターバル走90秒×7回</li><li>水泳：45分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-06-27",
+                    "exercise": "<ul><li>ランニング：60分 ジョギングペース インターバル走105秒×8回</li><li>水泳：50分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-01",
+                    "exercise": "<ul><li>ランニング：55分 ジョギングペース インターバル走90秒×7回</li><li>水泳：45分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-03",
+                    "exercise": "<ul><li>ランニング：60分 ジョギングペース インターバル走105秒×8回</li><li>水泳：50分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-05",
+                    "exercise": "<ul><li>ランニング：65分 ジョギングペース インターバル走120秒×9回</li><li>水泳：55分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-07",
+                    "exercise": "<ul><li>ランニング：60分 ジョギングペース インターバル走105秒×8回</li><li>水泳：50分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-09",
+                    "exercise": "<ul><li>ランニング：65分 ジョギングペース インターバル走120秒×9回</li><li>水泳：55分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-11",
+                    "exercise": "<ul><li>ランニング：70分 ジョギングペース インターバル走135秒×10回</li><li>水泳：60分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-14",
+                    "exercise": "<ul><li>ランニング：65分 ジョギングペース インターバル走120秒×9回</li><li>水泳：55分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-16",
+                    "exercise": "<ul><li>ランニング：70分 ジョギングペース インターバル走135秒×10回</li><li>水泳：60分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-18",
+                    "exercise": "<ul><li>ランニング：75分 ジョギングペース インターバル走150秒×11回</li><li>水泳：65分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-21",
+                    "exercise": "<ul><li>ランニング：70分 ジョギングペース インターバル走135秒×10回</li><li>水泳：60分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-23",
+                    "exercise": "<ul><li>ランニング：75分 ジョギングペース インターバル走150秒×11回</li><li>水泳：65分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-25",
+                    "exercise": "<ul><li>ランニング：80分 ジョギングペース インターバル走165秒×12回</li><li>水泳：70分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-28",
+                    "exercise": "<ul><li>ランニング：75分 ジョギングペース インターバル走150秒×11回</li><li>水泳：65分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-07-30",
+                    "exercise": "<ul><li>ランニング：80分 ジョギングペース インターバル走165秒×12回</li><li>水泳：70分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-01",
+                    "exercise": "<ul><li>ランニング：85分 ジョギングペース インターバル走180秒×13回</li><li>水泳：75分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-04",
+                    "exercise": "<ul><li>ランニング：80分 ジョギングペース インターバル走165秒×12回</li><li>水泳：70分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-06",
+                    "exercise": "<ul><li>ランニング：85分 ジョギングペース インターバル走180秒×13回</li><li>水泳：75分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-08",
+                    "exercise": "<ul><li>ランニング：90分 ジョギングペース インターバル走195秒×14回</li><li>水泳：80分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-11",
+                    "exercise": "<ul><li>ランニング：85分 ジョギングペース インターバル走180秒×13回</li><li>水泳：75分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-13",
+                    "exercise": "<ul><li>ランニング：90分 ジョギングペース インターバル走195秒×14回</li><li>水泳：80分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-15",
+                    "exercise": "<ul><li>ランニング：95分 ジョギングペース インターバル走210秒×15回</li><li>水泳：85分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-18",
+                    "exercise": "<ul><li>ランニング：90分 ジョギングペース インターバル走195秒×14回</li><li>水泳：80分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-20",
+                    "exercise": "<ul><li>ランニング：95分 ジョギングペース インターバル走210秒×15回</li><li>水泳：85分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-22",
+                    "exercise": "<ul><li>ランニング：100分 ジョギングペース インターバル走225秒×16回</li><li>水泳：90分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-25",
+                    "exercise": "<ul><li>ランニング：95分 ジョギングペース インターバル走210秒×15回</li><li>水泳：85分 中程度のペース</li></ul>"
+                },
+                {
+                    "date": "2025-08-27",
+                    "exercise": "<ul><li>ランニング：100分 ジョギングペース インターバル走225秒×16回</li><li>水泳：90分 中程度のペース</li></ul>"
+                }
+                ],
             },
             {
                 id: 3,
                 name: "Sample Training",
                 goal: "Sample Goal",
                 frequency: "3 times a week",
-                plan: [{"date": "2025-01-01", "excersize": "Sample Exercise"}],
+                plan: [{"date": "2025-01-01", "exercise": "Sample Exercise"}],
             },
         ]
     }
@@ -91,10 +236,10 @@ const DashboardPage = () => {
                                     <p><strong>頻度:</strong></p>
                                     <p>{training.frequency}</p>
                                 </div>
-                                {/* 新しく追加されたexcercise, start_date, end_dateも同様に配置可能 */}
+                                {/* 新しく追加されたexercise, start_date, end_dateも同様に配置可能 */}
                                 <div className="card-details-item">
                                     <p><strong>運動内容:</strong></p>
-                                    <p>{training.excercise}</p>
+                                    <p>{training.exercise}</p>
                                 </div>
                                 <div className="card-details-item">
                                     <p><strong>開始日:</strong></p>
@@ -117,7 +262,7 @@ const DashboardPage = () => {
                                         return (
                                             <li key={index} className='plan-item'>
                                                 <p className="plan-item-date">{item.date} ({day}):</p>
-                                                <p dangerouslySetInnerHTML={{ __html: item.excersize }} />
+                                                <p dangerouslySetInnerHTML={{ __html: item.exercise }} />
                                             </li>
                                         );
                                     })}
