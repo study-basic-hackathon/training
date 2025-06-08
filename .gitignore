@@ -40,3 +40,9 @@ dist/
 
 # その他
 .env # 環境変数ファイル
+# Other common files and directories
+*.DS_Store
+Thumbs.db
+
+# APIKeyをここで隠す
+.env
