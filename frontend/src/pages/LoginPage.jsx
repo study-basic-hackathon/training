@@ -5,7 +5,6 @@ const LoginPage = () => {
         <div>
             <h1>トップページ / ログイン</h1>
             <p>ここがトップページです。</p>
-            <button>ログイン</button>
         </div>
     );
 };

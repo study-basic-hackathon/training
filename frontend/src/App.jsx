@@ -17,17 +17,7 @@ function App() {
     return (<>
         <Router>
             <Header />
-
-            {/* 各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置) */}
-            <nav style={{ width: '100%', padding: '10px', backgroundColor: '#f0f0f0' }}>
-                <p style={{ color: '#333' }}>各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置)</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Link to="/">Login (Top)</Link>
-                    <Link to="/dashboard">Dashboard</Link>
-                    <Link to="/create">Create Plan</Link>
-                    <Link to="/result">Plan Result</Link>
-                </div>
-            </nav>
+            
             {/* ルートの定義 */}
             <Routes>
                 <Route path="/" element={<LoginPage />} /> 初期表示のルート
