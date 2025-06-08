@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from prompt_builder import build_prompt
+from backend.api.sevices.prompt_builder import build_prompt
 
 # .env 読み込み
 load_dotenv()
