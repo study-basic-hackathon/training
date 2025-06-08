@@ -42,14 +42,23 @@
     margin-bottom: 30px;
 }
 
+/* トレーニングカードの全体コンテナ（カードが縦に積み重なる）*/
+.training-cards-container {
+    display: flex;
+    flex-direction: column; /* 各カードを縦に積み重ねる */
+    gap: 25px; /* カード間の縦の隙間 */
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
 /* 各トレーニングカード */
 .training-card {
-    background-color: #d9d9d9;
+    background-color: #f8f8f8; /* 目に優しいオフホワイト系の背景色 */
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     padding: 25px; /* カード全体のパディングはゆとりを持たせる */
     display: flex;
-    flex-direction: column; /* ★ カード内の要素を縦に並べる (コンテンツブロックとボタン群) ★ */
+    flex-direction: column; /* ★カード内の要素を縦に並べる（タイトル、情報行、プラン、ボタン）★ */
     justify-content: space-between; /* コンテンツとボタンを上下に分離 */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
@@ -61,15 +70,19 @@
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* トレーニング名 (h3タグ) */
 .training-card h3 {
     color: #34495e;
     margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.6em;
+    margin-bottom: 15px; /* 下の要素との間隔 */
+    font-size: 1.8em; /* タイトルなので少し大きめに */
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+    text-align: left; /* 左寄せ */
+    width: 100%; /* ★一行全体を使う★ */
 }
 
+/* その他の情報（pタグ） */
 .training-card p {
     color: #555;
     line-height: 1.6;
@@ -82,59 +95,58 @@
     white-space: nowrap; /* ラベルが改行されないように */
 }
 
-/* ★ 新設: カード内の主要な情報を横並びにするためのラッパー ★ */
-.card-content-wrapper {
+/* 頻度と目的を横並びにするためのラッパー */
+.card-details-row {
     display: flex;
-    flex-direction: row; /* ★ これが横並びを実現 ★ */
-    align-items: flex-start; /* 縦方向の揃え位置を上部に */
-    gap: 20px; /* 各情報ブロック間の横の隙間 */
+    flex-direction: row; /* 横並び */
+    align-items: flex-start; /* 上揃え */
+    gap: 30px; /* 項目間の横の隙間を広めに */
     flex-wrap: wrap; /* 画面が狭い場合に折り返す */
-    margin-bottom: 20px; /* 下のボタンとの間に余白 */
+    margin-bottom: 20px; /* AIプランとの間隔 */
+    width: 100%; /* 親要素の幅を使う */
 }
 
-/* 各情報のコンテナ */
-.card-info-item {
+/* 頻度と目的の各アイテム */
+.card-details-item {
     display: flex;
     flex-direction: column; /* ラベルと値を縦に並べる */
-    /* 各アイテムの幅を調整 */
-    flex-basis: 150px; /* ある程度の最小幅 */
-    flex-shrink: 0; /* 縮まない */
-    flex-grow: 0; /* 伸びない */
-}
-.card-info-item.name {
-    flex-basis: 200px; /* トレーニング名は少し広めに */
-}
-.card-info-item.goal {
-    flex-basis: 180px;
-}
-.card-info-item.frequency {
-    flex-basis: 90px;
+    /* 必要に応じてmin-widthなどを設定 */
 }
 
-
-/* AIからのプラン (最も広く取る) */
-/* .plan-text はpタグに直接適用され、その親の.card-info-item.planがflex-growを持つ */
-.card-info-item.plan {
-    flex-grow: 1; /* ★ AIプランのブロック全体が残りのスペースを占める ★ */
-    min-width: 280px; /* 小さい画面での崩れ防止のための最小幅 */
-    display: flex; /* AIプランのラベルとテキストを縦に並べる */
-    flex-direction: column;
+/* AIからのプランのセクション */
+.card-plan-section {
+    width: 100%; /* ★一行全体を使う★ */
+    margin-bottom: 20px; /* ボタンとの間隔 */
+    text-align: left;
 }
 
-.training-card .plan-text {
-    font-size: 0.95em;
-    color: #666;
+.training-card .plan-list { /* ulタグに適用 */
+    list-style: none; /* リストの点線を消す */
+    padding: 0; /* デフォルトパディングを消す */
+    margin: 5px 0 0 0; /* ラベルとの隙間 */
     background-color: #f8f9fa;
     border-left: 3px solid #007bff;
     border-radius: 5px;
-    white-space: pre-wrap; /* 改行を保持 */
-    word-wrap: break-word; /* 長い単語を改行 */
-    text-align: left;
     padding: 10px 15px; /* 上下左右のパディング */
-    margin-top: 5px; /* ラベルとの隙間 */
 }
 
+.training-card .plan-item { /* liタグに適用 */
+    margin-bottom: 10px; /* 各プランアイテム間の隙間 */
+    display: flex; /* 日付と内容を横並びにする */
+    flex-direction: column; /* 日付と内容を縦に並べる */
+    gap: 5px; /* 日付と内容の間の隙間 */
+}
+.training-card .plan-item:last-child {
+    margin-bottom: 0; /* 最後のアイテムの下マージンは不要 */
+}
 
+.training-card .plan-item-date {
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9em;
+}
+
+/* アクションボタン群 */
 .card-actions {
     display: flex;
     justify-content: flex-end; /* ボタンを右寄せに */

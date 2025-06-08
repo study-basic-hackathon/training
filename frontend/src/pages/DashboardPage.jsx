@@ -8,29 +8,49 @@ import './DashboardPage.css'
 const API_URL = '/api/training';
 
 const DashboardPage = () => {
-    const { data, loading, error } = useFetchData(API_URL)
-    const navigate = useNavigate();
+    const { data, loading, error } = useFetchData(API_URL)  // カスタムフックを使用してデータを取得
+    const navigate = useNavigate(); // useNavigateフックを使用してページ遷移を管理
 
     // APIから取得するデータの例
     const sampleData = {
         trainings: [
             {
-                name: "Sample Training",
-                goal: "Sample Goal",
-                frequency: "3 times a week",
-                plan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                id: 1,
+                name: "３か月で-5kg減量するぞ！",
+                goal: "減量",
+                excercise: "筋トレ、ランニング",
+                frequency: "月、水、金",
+                start_date: "2025-7-01",
+                end_date: "2025-9-30",
+                plan:[
+                { "date": "2025-07-01", "excersize": "<ul><li>スクワット：10回 × 3セット</li><li>プッシュアップ（膝つきでも可）：10回 × 3セット</li><li>バックエクステンション：10回 × 3セット</li><li>プランク：30秒 × 3セット</li></ul>" },
+                { "date": "2025-07-04", "excersize": "ランニング：30分" },
+                { "date": "2025-07-07", "excersize": "<ul><li>ランジ：左右各10回 × 3セット</li><li>ダンベルロウ（ペットボトルでも可）：左右各10回 × 3セット</li><li>ヒップリフト：15回 × 3セット</li><li>サイドプランク：左右各20秒 × 3セット</li></ul>" },
+                { "date": "2025-07-09", "excersize": "ランニング：30分" },
+                { "date": "2025-07-11", "excersize": "<ul><li>スクワット：12回 × 3セット</li><li>プッシュアップ：12回 × 3セット</li><li>バックエクステンション：12回 × 3セット</li><li>プランク：40秒 × 3セット</li></ul>" },
+                { "date": "2025-07-14", "excersize": "ランニング：30分" },
+                { "date": "2025-07-16", "excersize": "<ul><li>ランジ：左右各12回 × 3セット</li><li>ダンベルロウ：左右各12回 × 3セット</li><li>ヒップリフト：18回 × 3セット</li><li>サイドプランク：左右各30秒 × 3セット</li></ul>" },
+                { "date": "2025-07-18", "excersize": "ランニング：30分" },
+                { "date": "2025-07-21", "excersize": "<ul><li>スクワット：15回 × 3セット</li><li>プッシュアップ：15回 × 3セット</li><li>バックエクステンション：15回 × 3セット</li><li>プランク：50秒 × 3セット</li></ul>" },
+                { "date": "2025-07-23", "excersize": "ランニング：30分" },
+                { "date": "2025-07-25", "excersize": "<ul><li>ランジ：左右各15回 × 3セット</li><li>ダンベルロウ：左右各15回 × 3セット</li><li>ヒップリフト：20回 × 3セット</li><li>サイドプランク：左右各40秒 × 3セット</li></ul>" },
+                { "date": "2025-07-28", "excersize": "ランニング：30分" },
+                { "date": "2025-07-30", "excersize": "<ul><li>スクワット：15回 × 3セット</li><li>プッシュアップ：15回 × 3セット</li><li>バックエクステンション：15回 × 3セット</li><li>プランク：60秒 × 3セット</li></ul>" }
+                ],
             },
             {
+                id: 2,
                 name: "Sample Training",
                 goal: "Sample Goal",
                 frequency: "3 times a week",
-                plan: "AI generated plan",
+                plan: [{"date": "2025-01-01", "excersize": "Sample Exercise"}],
             },
             {
+                id: 3,
                 name: "Sample Training",
                 goal: "Sample Goal",
                 frequency: "3 times a week",
-                plan: "AI generated plan",
+                plan: [{"date": "2025-01-01", "excersize": "Sample Exercise"}],
             },
         ]
     }
@@ -51,30 +71,60 @@ const DashboardPage = () => {
         {!data && <p>データがありません。</p>}   {/* データがない場合の表示（念のため） */}
             
         <div>
-            {/* ★ カード形式のレイアウトに変更 ★ */}
+            {/* ★ カード形式のレイアウト ★ */}
             {sampleData && sampleData.trainings && sampleData.trainings.length > 0 ? (
                 <div className="training-cards-container">
                     {sampleData.trainings.map((training) => (
                         <div key={training.id} className="training-card">
-                            <div className="card-content-wrapper">
-                                <div className="card-info-item name">
-                                    <p><strong>トレーニング名:</strong></p>
-                                    <p>{training.name}</p> 
-                                </div>
-                                <div className="card-info-item goal">
+                           {/* ★トレーニング名はカードの最上部に配置し、一行全体を使う★ */}
+                            <h3>{training.name}</h3> 
+
+                            {/* ★頻度と目的を横並びにするラッパー★ */}
+                            <div className="card-details-row">
+                                {/* 目的 */}
+                                <div className="card-details-item">
                                     <p><strong>目的:</strong></p>
                                     <p>{training.goal}</p>
                                 </div>
-                                <div className="card-info-item frequency">
+                                {/* 頻度 */}
+                                <div className="card-details-item">
                                     <p><strong>頻度:</strong></p>
                                     <p>{training.frequency}</p>
                                 </div>
-                                <div className="card-info-item plan">
-                                    <p><strong>AIからのプラン:</strong></p>
-                                    <p className="plan-text">{training.plan}</p>
+                                {/* 新しく追加されたexcercise, start_date, end_dateも同様に配置可能 */}
+                                <div className="card-details-item">
+                                    <p><strong>運動内容:</strong></p>
+                                    <p>{training.excercise}</p>
+                                </div>
+                                <div className="card-details-item">
+                                    <p><strong>開始日:</strong></p>
+                                    <p>{training.start_date}</p>
+                                </div>
+                                <div className="card-details-item">
+                                    <p><strong>終了日:</strong></p>
+                                    <p>{training.end_date}</p>
                                 </div>
                             </div>
 
+                            {/* ★AIからのプランをその下に配置★ */}
+                            <div className="card-plan-section">
+                                <p><strong>AIからのプラン:</strong></p>
+                                <ul className="plan-list">
+                                    {training.plan.map((item, index) => {
+                                        const days = ['日', '月', '火', '水', '木', '金', '土'];
+                                        const dateObj = new Date(item.date);
+                                        const day = days[dateObj.getDay()];
+                                        return (
+                                            <li key={index} className='plan-item'>
+                                                <p className="plan-item-date">{item.date} ({day}):</p>
+                                                <p dangerouslySetInnerHTML={{ __html: item.excersize }} />
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                            
+                            {/* アクションボタン群 */}
                             <div className="card-actions">
                                 <button
                                     className="card-button edit"
