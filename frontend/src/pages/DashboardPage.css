@@ -1,0 +1,214 @@
+/* frontend/src/pages/DashboardPage.css */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.dashboard-header {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.dashboard-loading,
+.dashboard-error {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.dashboard-error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* トレーニングカードの全体コンテナ（カードが縦に積み重なる）*/
+.training-cards-container {
+    display: flex;
+    flex-direction: column; /* 各カードを縦に積み重ねる */
+    gap: 25px; /* カード間の縦の隙間 */
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+/* トレーニングカードの全体コンテナ（カードが縦に積み重なる）*/
+.training-cards-container {
+    display: flex;
+    flex-direction: column; /* 各カードを縦に積み重ねる */
+    gap: 25px; /* カード間の縦の隙間 */
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+/* 各トレーニングカード */
+.training-card {
+    background-color: #f8f8f8; /* 目に優しいオフホワイト系の背景色 */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 25px; /* カード全体のパディングはゆとりを持たせる */
+    display: flex;
+    flex-direction: column; /* ★カード内の要素を縦に並べる（タイトル、情報行、プラン、ボタン）★ */
+    justify-content: space-between; /* コンテンツとボタンを上下に分離 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.training-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* トレーニング名 (h3タグ) */
+.training-card h3 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 15px; /* 下の要素との間隔 */
+    font-size: 1.8em; /* タイトルなので少し大きめに */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    text-align: left; /* 左寄せ */
+    width: 100%; /* ★一行全体を使う★ */
+}
+
+/* その他の情報（pタグ） */
+.training-card p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0; /* デフォルトマージンをリセット */
+}
+
+.training-card strong {
+    color: #2c3e50;
+    margin-right: 5px;
+    white-space: nowrap; /* ラベルが改行されないように */
+}
+
+/* 頻度と目的を横並びにするためのラッパー */
+.card-details-row {
+    display: flex;
+    flex-direction: row; /* 横並び */
+    align-items: flex-start; /* 上揃え */
+    gap: 30px; /* 項目間の横の隙間を広めに */
+    flex-wrap: wrap; /* 画面が狭い場合に折り返す */
+    margin-bottom: 20px; /* AIプランとの間隔 */
+    width: 100%; /* 親要素の幅を使う */
+}
+
+/* 頻度と目的の各アイテム */
+.card-details-item {
+    display: flex;
+    flex-direction: column; /* ラベルと値を縦に並べる */
+    /* 必要に応じてmin-widthなどを設定 */
+}
+
+/* AIからのプランのセクション */
+.card-plan-section {
+    width: 100%; /* ★一行全体を使う★ */
+    margin-bottom: 20px; /* ボタンとの間隔 */
+    text-align: left;
+}
+
+.training-card .plan-list { /* ulタグに適用 */
+    list-style: none; /* リストの点線を消す */
+    padding: 0; /* デフォルトパディングを消す */
+    margin: 5px 0 0 0; /* ラベルとの隙間 */
+    background-color: #f8f9fa;
+    border-left: 3px solid #007bff;
+    border-radius: 5px;
+    padding: 10px 15px; /* 上下左右のパディング */
+}
+
+.training-card .plan-item { /* liタグに適用 */
+    margin-bottom: 10px; /* 各プランアイテム間の隙間 */
+    display: flex; /* 日付と内容を横並びにする */
+    flex-direction: column; /* 日付と内容を縦に並べる */
+    gap: 5px; /* 日付と内容の間の隙間 */
+}
+.training-card .plan-item:last-child {
+    margin-bottom: 0; /* 最後のアイテムの下マージンは不要 */
+}
+
+.training-card .plan-item-date {
+    font-weight: bold;
+    color: #444;
+    font-size: 0.9em;
+}
+
+/* アクションボタン群 */
+.card-actions {
+    display: flex;
+    justify-content: flex-end; /* ボタンを右寄せに */
+    gap: 10px; /* ボタン間の隙間 */
+    margin-top: auto; /* コンテンツが少ないカードでもボタンを下に固定 */
+}
+
+.card-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap; /* ボタン内のテキストが改行されないように */
+}
+
+.card-button.edit {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.card-button.edit:hover {
+    background-color: #e0a800;
+    transform: translateY(-1px);
+}
+
+.card-button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.card-button.delete:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.no-training-message {
+    text-align: center;
+    font-size: 1.1em;
+    color: #777;
+    padding: 50px 0;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+}
+
+.new-plan-button {
+    display: block; /* ブロック要素にして中央に配置 */
+    margin-left: auto;
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.new-plan-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
