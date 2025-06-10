@@ -11,6 +11,8 @@ import Header from './components/common/Header';
 // import Footer from './components/common/Footer';
 
 import './App.css'
+import TrainingForm from './components/TrainingForm';
+import UserRegistration from './components/UserRegistration'; // ユーザー登録コンポーネントをインポート
 
 function App() {
 
@@ -20,7 +22,8 @@ function App() {
             
             {/* ルートの定義 */}
             <Routes>
-                <Route path="/" element={<LoginPage />} /> 初期表示のルート
+                <Route path="/" element={<UserRegistration />} /> 初期表示のルート
+                <Route path="/api/training" element={<TrainingForm />} /> {/* APIトレーニングのダッシュボード */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 {/* <Route path="/create" element={<PlanCreatePage />} /> */}

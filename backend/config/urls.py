@@ -27,6 +27,10 @@ import os # 追加
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/training/', include('api.training.urls')),  # スラッシュを追加
+    # path('api/exercises/',include('api.exercises.urls')),  # スラッシュを追加
+    path('api/goals/', include('api.goals.urls')),  # スラッシュを追加
+    # path('auth/', include('djoser.urls')),  
+    # path('auth/', include('djoser.urls.jwt')),  # JWT認証のためのURLを追加
 ]
 
 # 開発サーバーで静的ファイルとメディアファイルを配信するための設定 (本番環境では使用しない)

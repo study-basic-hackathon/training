@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.BackendView.as_view(), name='training'),
+    path('', views.TrainingViewSet.as_view({'get':'list'}), name='training'),
 ]
