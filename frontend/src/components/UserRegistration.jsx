@@ -36,7 +36,7 @@ function UserRegistration() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/users/register/', {
+      const response = await fetch('/api/users/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ function UserRegistration() {
       localStorage.setItem('username', data.username);
       
       // ダッシュボードへリダイレクト
-      navigate('/api/training');
+      navigate('/test/training');
       
     } catch (err) {
       setError(err.message || 'エラーが発生しました');

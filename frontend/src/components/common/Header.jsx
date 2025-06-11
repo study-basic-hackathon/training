@@ -13,13 +13,19 @@ const Header = () => {
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
                     <NavLink to="/" end>Login (Top)</NavLink>
                         {/* end プロパティ: ルートパス (/) の NavLink には end プロパティを追加しています。これは exact プロパティの新しい名称で、パスが完全に一致する場合にのみ active クラスを適用するために使います。これがないと、/dashboard にいる時でも / のリンクがアクティブになってしまう可能性があります。 */}
-                    <NavLink to="/api/training">Dashboard</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                     <NavLink to="/create">Create Plan</NavLink>
                     <NavLink to="/result">Plan Result</NavLink>
                 </div>
+                <p style={{ color: '#333', margin: 0, padding: 0 }}>APIエンドポイントのテスト用</p>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+                    <NavLink to="/test/users/register">Users Register Test</NavLink>
+                    <NavLink to="/test/login">Users Login Test</NavLink>
+                    <NavLink to="/test/training">Training CRUD Test</NavLink>
+                </div>
             </nav>
 
-            <p>(HEADERおわりa)</p>
+            <p>(HEADERおわり)</p>
             <hr />
         </div>
     </>);
