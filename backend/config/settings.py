@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',      # ★追加: CORS ヘッダーミドルウェアを有効にするため
         #CORS (Cross-Origin Resource Sharing) の設定不足: フロントエンドの Vue.js アプリケーションが動作するドメイン（通常 http://localhost:8080 や http://127.0.0.1:8080）から、バックエンドの Django API (http://127.0.0.1:8080) にアクセスするためには、CORS の設定が必要です。これが不足していると、ブラウザのセキュリティ機能によって通信がブロックされます。
     'api.training',     # ★追加: あなたのDjangoアプリケーションを認識させるため
+    'api.goals',        # ★追加: 目標管理のアプリケーション
+    # 'api.exercises',   # ★追加: エクササイズ管理のアプリケーション
     # 'api', # これはもし 'api' という名前のアプリが別に存在するなら残しますが、
              # ほとんどの場合 'api.training' のみで十分です。
              # 状況に応じて残すか削除するか判断してください。
@@ -154,3 +156,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 必要に応じて他の認証クラスを追加
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}

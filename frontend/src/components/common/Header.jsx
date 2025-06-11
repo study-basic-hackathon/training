@@ -17,6 +17,12 @@ const Header = () => {
                     <NavLink to="/create">Create Plan</NavLink>
                     <NavLink to="/result">Plan Result</NavLink>
                 </div>
+                <p style={{ color: '#333', margin: 0, padding: 0 }}>APIエンドポイントのテスト用</p>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
+                    <NavLink to="/test/users/register">Users Register Test</NavLink>
+                    <NavLink to="/test/login">Users Login Test</NavLink>
+                    <NavLink to="/test/training">Training CRUD Test</NavLink>
+                </div>
             </nav>
 
             <p>(HEADERおわり)</p>
