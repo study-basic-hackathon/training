@@ -1,0 +1,243 @@
+/* frontend/src/pages/AITest.css */
+
+.ai-test-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ai-test-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* 自動入力ボタンのスタイル */
+.autofill-button {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    background-color: #17a2b8; /* インフォメーションっぽい色 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.autofill-button:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+}
+
+/* フォーム全体のスタイル */
+.ai-input-form {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* フォームグループ間の隙間 */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1.05em;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* フォームのテキスト入力、日付入力、テキストエリアに共通のスタイル */
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    width: 100%; /* 親要素に合わせる */
+    box-sizing: border-box; /* パディングとボーダーを幅に含める */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 80px; /* 最小高さ */
+    resize: vertical; /* 縦方向のみリサイズ可能 */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end; /* ボタンを右寄せ */
+    gap: 15px; /* ボタン間の隙間 */
+    margin-top: 20px;
+}
+
+.generate-button, .reset-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.generate-button {
+    background-color: #28a745; /* 緑色 */
+    color: white;
+}
+
+.generate-button:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.generate-button:disabled {
+    background-color: #a0c9ed;
+    cursor: not-allowed;
+}
+
+.reset-button {
+    background-color: #6c757d; /* グレー */
+    color: white;
+}
+
+.reset-button:hover:not(:disabled) {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+
+/* ローディング、エラー表示のスタイル */
+.ai-loading, .ai-error {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.ai-loading {
+    background-color: #e0f7fa;
+    color: #007bff;
+    border: 1px solid #b3e5fc;
+}
+
+.ai-error {
+    background-color: #f8d7da;
+    color: #dc3545;
+    border: 1px solid #f5c6cb;
+}
+
+/* AI生成結果表示セクションのスタイル */
+.ai-result-section {
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.ai-result-section h3 {
+    color: #495057;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.ai-plan-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ai-plan-item {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.ai-plan-item .ai-plan-date {
+    font-weight: bold;
+    color: #0056b3;
+    margin: 0;
+    font-size: 1.15em;
+}
+
+.ai-plan-item div {
+    line-height: 1.7;
+    color: #333;
+}
+
+.ai-plan-item div ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-top: 8px;
+}
+
+.ai-plan-item div li {
+    margin-bottom: 6px;
+}
+
+/* APIステータスメッセージ */
+.text-green-500 {
+    color: #28a745;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.text-red-500 {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .ai-test-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+    .ai-test-container h2 {
+        font-size: 2em;
+    }
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .generate-button, .reset-button {
+        width: 100%;
+    }
+}

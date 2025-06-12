@@ -49,7 +49,45 @@ class TrainingViewSet(viewsets.ModelViewSet):
         serializer  = self.get_serializer(plan)
         return Response(serializer.data, status = status.HTTP_201_CREATED)
 
+# AIプラン生成のテスト用
+class AIGenerationTestView(APIView):
+    """
+    AIによるトレーニングプラン生成のテスト用APIエンドポイント。
+    フロントエンドからの入力を受け取り、ダミーのAI生成プランを返します。
+    実際にAIモデルと連携する際のテンプレートとして使用します。
+    """
+    # テスト用なので、認証なしでアクセスを許可します。
+    permission_classes = [AllowAny] 
 
+    def post(self, request, *args, **kwargs):
+        # ここで、フロントエンドから送られてくる入力データ（例: 目標、運動内容など）を
+        # 受け取ることができますが、今回はダミーデータを返すため直接は利用しません。
+        user_input_data = request.data # 例: {"goal": "体重を減らす", "exercises": "ランニング"}
+
+        # ★★★ ダミーのAI生成プランコンテンツ ★★★
+        # 実際にAIを呼び出す場合は、ここにAIサービスとの連携ロジックを記述します。
+        # 例: from api.services.gemini_service import generate_ai_plan
+        # ai_generated_content = generate_ai_plan(user_input_data)
         
+        dummy_ai_plan_content = [
+            {
+                "date": "2025-06-15",
+                "exercise": "<ul><li>テストAIプラン: ウォーミングアップ 5分</li><li>テストAIプラン: スクワット 3セット</li><li>テストAIプラン: ランニング 20分</li></ul>"
+            },
+            {
+                "date": "2025-06-16",
+                "exercise": "<ul><li>テストAIプラン: 休息日（アクティブリカバリー）</li><li>テストAIプラン: 軽いストレッチ 10分</li></ul>"
+            },
+            {
+                "date": "2025-06-17",
+                "exercise": "<ul><li>テストAIプラン: プッシュアップ 3セット</li><li>テストAIプラン: プランク 3セット</li><li>テストAIプラン: クールダウン 5分</li></ul>"
+            },
+            {
+                "date": "2025-06-18",
+                "exercise": "<ul><li>テストAIプラン: ヨガ 45分</li><li>テストAIプラン: 瞑想 15分</li></ul>"
+            }
+        ]
         
+        # 成功レスポンスとして、生成された（ダミーの）プランをJSON形式で返します。
+        return Response({"plan": dummy_ai_plan_content}, status=status.HTTP_200_OK)
 
