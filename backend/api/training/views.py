@@ -49,7 +49,24 @@ class TrainingViewSet(viewsets.ModelViewSet):
         serializer  = self.get_serializer(plan)
         return Response(serializer.data, status = status.HTTP_201_CREATED)
 
+# AIプラン生成のテスト用
+class AIGenerationTestView(APIView):
+    """
+    AIによるトレーニングプラン生成のテスト用APIエンドポイント。
+    実際にAIモデルと連携する際のテンプレートとして使用します。
+    """
+    # テスト用なので、認証なしでアクセスを許可します。
+    permission_classes = [AllowAny] 
+    
+    def post(self, request, *args, **kwargs):
+        # ここで、フロントエンドから送られてくる入力データ（例: 目標、運動内容など）を
+        user_input_data = request.data # 例: {"goal": "体重を減らす", "exercises": "ランニング"}
 
+        # 実際にAIを呼び出す場合は、ここにAIサービスとの連携ロジックを記述します。
+        from api.services.chatgpt import generate_training_plan
+        ai_generated_content = generate_training_plan(user_input_data)
         
-        
+        # 成功レスポンスとして、生成された（ダミーの）プランをJSON形式で返します。
+        return Response({"plan": ai_generated_content}, status=status.HTTP_200_OK)
 
+# このビューは、AIによるトレーニングプラン生成のテスト用です。
