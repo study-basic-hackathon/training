@@ -8,54 +8,44 @@ registerLocale('ja', ja);
 
 export default function PlanCreatePage() {
     const navigate = useNavigate();
-    const [selectedDays, setSelectedDays] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
-
-    const days = ["月", "火", "水", "木", "金", "土", "日"];
     const exercises = ["ランニング", "ジョギング", "水泳", "なわとび", "プッシュアップ", "プランク", "HIIT", "ヨガ", "有酸素運動", "筋トレ", "クロスフィット"];
-
-    const toggleDay = (day) => {
-        setSelectedDays((prev) =>
-            prev.includes(day)
-                ? prev.filter((d) => d !== day)
-                : [...prev, day]
-        );
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // 必須チェック（先にする）
-        if (selectedDays.length === 0) {
-            alert("少なくとも1つの曜日を選択してください。");
-            return;
-        }
+        const formData = new FormData(e.target);
 
         if (!startDate || !endDate) {
             alert("スタート日と終了日を選択してください。");
             return;
         }
 
-        const formData = new FormData(e.target);
+        if (startDate > endDate) {
+            alert("終了日は開始日より後の日付を選んでください。");
+            return;
+        }
+
+        const formatDate = (date) => date.toISOString().split('T')[0];
 
         const exerciseTypes = formData.getAll("exerciseTypes");
         const availableEquipment = formData.getAll("availableEquipment");
         const focusAreas = formData.getAll("focusAreas");
 
         const payload = {
-            planName: formData.get("planName"),
-            customExercise: formData.get("customExercise"),
-            trainingGoal: formData.get("trainingGoal"),
-            availableEquipment: availableEquipment,
-            sessionLength: formData.get("sessionLength"),
-            focusAreas: focusAreas,
-            healthLimitations: formData.get("healthLimitations"),
-            exerciseTypes: exerciseTypes,
-            trainingDays: selectedDays,
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString(),
+            name: formData.get("planName"),
+            custom_exercise: formData.get("customExercise"),
+            goal: formData.get("trainingGoal"),
+            available_equipment: availableEquipment,
+            session_length: formData.get("sessionLength"),
+            focus_areas: focusAreas,
+            health_limitations: formData.get("healthLimitations"),
+            exercises: exerciseTypes,
+            frequency: formData.get("frequency"),
+            start_date: formatDate(startDate),
+            end_date: formatDate(endDate),
         };
 
         console.log(payload);
@@ -170,23 +160,7 @@ export default function PlanCreatePage() {
             {/* トレーニング日 */}
             <fieldset>
                 <legend className="font-semibold text-end">週に何回トレーニングを行いますか？</legend>
-                <div className="flex gap-2 flex-wrap">
-                    {days.map((day) => (
-                        <label key={day} className="border rounded px-3 py-1 cursor-pointer flex items-center gap-1">
-                            <input
-                                type="checkbox"
-                                checked={selectedDays.includes(day)}
-                                onChange={() => toggleDay(day)}
-                                className="hidden"
-                            />
-                            <span className={selectedDays.includes(day)
-                                ? "bg-blue-500 text-white px-2 py-1 rounded"
-                                : "px-2 py-1"}>
-                                {day}
-                            </span>
-                        </label>
-                    ))}
-                </div>
+                <input name="frequency" required className="w-full border rounded p-2" />
             </fieldset>
 
             {/* 実施期間 */}
