@@ -16,7 +16,7 @@ class GoalViewSet(viewsets.ModelViewSet):
     serializer_class = GoalSerializer
 
     def get_queryset(self):
-        if self.request.user.is_anonymous:
+        if not self.request.user.is_anonymous:
             return Goal.objects.filter(user = self.request.user)
         return Goal.objects.none()
     
@@ -30,6 +30,8 @@ class GoalViewSet(viewsets.ModelViewSet):
                 status = status.HTTP_400_BAD_REQUEST
             )
         
+        
+        user = request.user if not request.user.is_anonymous else None
         goal = Goal.objects.create(
             name = data.get('name'),
             frequency = data.get('frequency'),
@@ -37,6 +39,8 @@ class GoalViewSet(viewsets.ModelViewSet):
             end_date = data.get('end_date'),
             user = request.user,
         )
+
+        
 
         exercises_data = data.get('exercises', [])
         for index, exercises_data in enumerate(exercises_data):

@@ -5,11 +5,12 @@ from rest_framework.decorators import action
 from .models import TrainingPlan
 from .serializers import TrainingPlanSerializer
 # from services.gemini_service import GeminiService
-from api.goals.models import Goal
+# from api.goals.models import Goal
 from rest_framework.permissions import AllowAny
 
 
 class BackendView(APIView):
+
     def get(self, request):
         """
         Handle GET requests to the backend view.
@@ -25,29 +26,51 @@ class TrainingViewSet(viewsets.ModelViewSet):
     serializer_class = TrainingPlanSerializer
     
     def get_queryset(self):
+
         return TrainingPlan.objects.all()
     
-    @action(detail=False, methods=['post'])
-    def generate(self, request):
-        goal_id = request.data.get('goal_id')
-        if not goal_id:
-            return Response({"error": "Goal ID is required."}, status=status.HTTP_400_BAD_REQUEST)
-        goal = Goal.objects.filter(id = goal_id).first()
-        if not goal:
-            return Response({"error": "Goal not found."}, status=status.HTTP_404_NOT_FOUND)
+    def perform_create(self, serializer):
+        user_instance = self.request.user if self.request.user and self.request.user.is_authenticated else None
+
+
+        # しょう作成したやつをAIで生成した内容を保存する
+        # from api.services.chatgpt import generate_training_plan
+        #  ai_generated_content_for_save = generate_training_plan(serializer.validated_data)
+        ai_generated_content_for_save = [{"date": "2025-06-01","exercise": "<ul><li>ウォーミングアップ 5分</li><li>ジョギング 20分</li><li>クールダウン 5分</li></ul>"},
+                                        {"date": "2025-06-02","exercise": "<ul><li>筋力トレーニング：スクワット 3セット</li><li>プッシュアップ 3セット</li><li>プランク 3セット</li></ul>"}
+                                        ]
+        serializer.validated_data['plan'] = ai_generated_content_for_save
+        instance = serializer.save()
+        return instance
+    
+    def create(self, request, *args, **kwargs):
+        """オブジェクト作成時にIDのみを返す"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = self.perform_create(serializer)
+        return Response({'id': instance.id}, status=status.HTTP_201_CREATED)
+    
+    # @action(detail=False, methods=['post'])
+    # def generate(self, request):
+    #     goal_id = request.data.get('goal_id')
+    #     if not goal_id:
+    #         return Response({"error": "Goal ID is required."}, status=status.HTTP_400_BAD_REQUEST)
+    #     goal = Goal.objects.filter(id = goal_id).first()
+    
+    #         return Response({"error": "Goal not found."}, status=status.HTTP_404_NOT_FOUND)
         
-        # from services.gemini_service import GeminiService
-        # gemini_service = GeminiService()
-        # ai_response = gemini_service.generate_training_plan(goal)
+    #     # from services.gemini_service import GeminiService
+    #     # gemini_service = GeminiService()
+    #     # ai_response = gemini_service.generate_training_plan(goal)
 
-        plan = TrainingPlan.objects.create(
-            gaol=goal,
-            plan_name = request.data.get('plan_name', f"{goal.name}のプラン"),
-            # ai_generated_content = ai_response
-        )
+    #     plan = TrainingPlan.objects.create(
+    #         goal=goal,
+    #         plan_name = request.data.get('plan_name', f"{goal.name}のプラン"),
+    #         # ai_generated_content = ai_response
+    #     )
 
-        serializer  = self.get_serializer(plan)
-        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    #     serializer  = self.get_serializer(plan)
+    #     return Response(serializer.data, status = status.HTTP_201_CREATED)
 
 # AIプラン生成のテスト用
 class AIGenerationTestView(APIView):
