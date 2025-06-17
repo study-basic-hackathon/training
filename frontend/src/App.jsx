@@ -15,6 +15,7 @@ import './App.css'
 // // 開発用コンポーネント
 import TrainingForm from './components/TrainingForm';
 import UserRegistration from './components/UserRegistration'; // ユーザー登録コンポーネントをインポート
+import AITest from './components/AITest'; // ユーザー登録コンポーネントをインポート
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                 {/* 開発用 */}
                 <Route path="/test/users/register" element={<UserRegistration />} /> {/* User新規登録のテスト */}
                 <Route path="/test/training" element={<TrainingForm />} />  {/* APIトレーニングのダッシュボード */}
+                <Route path="/test/ai" element={<AITest />} />  {/* AI生成部分のみのテスト */}
             </Routes>
 
             {/* <Footer /> */}
