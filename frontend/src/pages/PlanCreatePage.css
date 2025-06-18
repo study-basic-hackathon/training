@@ -1,0 +1,42 @@
+fieldset {
+    text-align: end;
+}
+
+.end-date-label {
+    margin-left: 1rem;
+    margin-right: 0.3rem;
+}
+
+.start-date-label {
+    margin-right: 0.3rem;
+}
+
+.datepicker-wrapper {
+    position: relative;
+    min-height: 40px;
+    padding-right: inherit;
+}
+
+.react-datepicker-wrapper {
+    display: block;
+}
+
+.react-datepicker__input-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.bg-green-600 {
+    float: inline-end;
+    margin: 1rem;
+}
+
+.healthLimitations {
+    width: -webkit-fill-available;
+}
+
+.datekikan {
+    padding-right: inherit;
+}
