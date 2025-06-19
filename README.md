@@ -1,17 +1,21 @@
 ### 手順1（必要なら）: 不足しているモジュールをインストールする
 
-~~`pip install djangorestframework`~~  
-~~`pip install django-cors-headers`~~  
-仮想環境をアクティベートする  
+仮想環境をアクティベートしてから  
 (プロジェクトルート)/backendで  
 `pip install -r requirements.txt`  
 
 (プロジェクトルート)/frontendで  
 `npm install`  
+`npm run build`  
 
-### 手順2: ローカルサーバーを立てる
-[バックエンド] (プロジェクトルート)/backend　で　python manage.py runserver 8080    
-[フロントエンド] (プロジェクトルート)/frontend　で　npm run dev
+## 手順2a: データベースのマイグレーション
+[バックエンド] (プロジェクトルート)/backend　で  
+もし **db.sqlite3** というファイルがあったら削除する（しなくてもいけるときもあるけど一応）。  
+`python manage.py migrate`    
+
+## 手順2b:ローカルサーバーを立てる
+[バックエンド] (プロジェクトルート)/backend　で　`python manage.py runserver 8080`    
+[フロントエンド] (プロジェクトルート)/frontend　で　`npm run dev`  
 
 ### 手順3: ブラウザで確認
 勝手にブラウザが立ち上がってVite+Reactのページが見られる。  
