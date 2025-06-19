@@ -1,0 +1,235 @@
+.plan-result-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem 1.5rem;
+    background: #f9fbfd;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.08);
+}
+
+.plan-result-container h2 {
+    font-size: 2.2rem;
+    color: #1a237e;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    border-bottom: 2px solid #e3e7ef;
+    padding-bottom: 1.2rem;
+}
+
+/* ローディングとエラー状態 */
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.error {
+    color: #d32f2f;
+    background-color: #fff0f0;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ffcdd2;
+}
+
+/* プラン詳細セクション */
+.plan-details {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e3e7ef;
+}
+
+.plan-header h3 {
+    color: #283593;
+    font-size: 1.6rem;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.status {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    box-shadow: 0 1px 4px rgba(44, 62, 80, 0.07);
+}
+
+.status.active {
+    background-color: #e3fcec;
+    color: #1b5e20;
+    border: 1px solid #81c784;
+}
+
+.status.inactive {
+    background-color: #fff3e0;
+    color: #bf360c;
+    border: 1px solid #ffb74d;
+}
+
+/* プラン情報セクション */
+.plan-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2.2rem;
+}
+
+.info-item {
+    background: #f4f7fa;
+    padding: 1.1rem 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #1976d2;
+    box-shadow: 0 1px 4px rgba(44, 62, 80, 0.04);
+}
+
+.info-item label {
+    display: block;
+    color: #1976d2;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.02em;
+}
+
+.info-item span {
+    color: #333;
+    font-size: 1.08rem;
+    font-weight: 500;
+}
+
+/* スケジュールセクション */
+.plan-schedule h4 {
+    color: #283593;
+    font-size: 1.25rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.schedule-item {
+    background: #f4f7fa;
+    border-radius: 8px;
+    padding: 1.2rem 1rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    box-shadow: 0 1px 4px rgba(44, 62, 80, 0.04);
+    border-left: 4px solid #1976d2;
+}
+
+.schedule-item .date {
+    min-width: 110px;
+    font-weight: bold;
+    color: #1976d2;
+    font-size: 1.08rem;
+    padding: 0.5rem 0.7rem;
+    background: #e3f2fd;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(44, 62, 80, 0.04);
+}
+
+.schedule-item .exercise {
+    flex: 1;
+    color: #444;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.schedule-item .exercise ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schedule-item .exercise li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.schedule-item .exercise li:before {
+    content: "•";
+    color: #1976d2;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* 戻るボタン */
+.back-button {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2.2rem;
+    background: linear-gradient(90deg, #1976d2 0%, #42a5f5 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.13rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    letter-spacing: 0.04em;
+}
+
+.back-button:hover {
+    background: linear-gradient(90deg, #1565c0 0%, #64b5f6 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(44, 62, 80, 0.13);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .plan-result-container {
+        padding: 1rem;
+    }
+
+    .plan-result-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .plan-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .plan-info {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-item {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+
+    .schedule-item .date {
+        min-width: auto;
+        width: 100%;
+    }
+}

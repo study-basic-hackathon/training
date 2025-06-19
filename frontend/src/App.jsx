@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PlanCreatePage from './pages/PlanCreatePage';
-// import PlanResultPage from './pages/PlanResultPage';
+import PlanResultPage from './pages/PlanResultPage';
 
 // // 共通コンポーネント (後で作成)
 import Header from './components/common/Header';
@@ -28,7 +28,7 @@ function App() {
                 <Route path="/" element={<LoginPage />} /> {/* 初期表示のルート */}
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/create" element={<PlanCreatePage />} />
-                {/* <Route path="/result" element={<PlanResultPage />} /> */}
+                <Route path="/result/:id" element={<PlanResultPage />} />
                 {/* その他のルートがあれば追加 */}
 
                 {/* 開発用 */}
