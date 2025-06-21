@@ -12,7 +12,7 @@ function TrainingForm() {
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const res = await fetch('/api/training/'); 
+        const res = await fetch('/api/training/');
         if (!res.ok) throw new Error('一覧取得に失敗しました');
         const data = await res.json();
         setTrainings(data);
@@ -68,11 +68,11 @@ function TrainingForm() {
     setAiResponse('');
 
     try {
-    //   // ユーザーIDを取得（ローカルストレージまたはコンテキストから）
-    //   const userId = localStorage.getItem('userId');
-    //   if (!userId) {
-    //     throw new Error('ユーザーが登録されていません。先にログインしてください。');
-    //   }
+      //   // ユーザーIDを取得（ローカルストレージまたはコンテキストから）
+      //   const userId = localStorage.getItem('userId');
+      //   if (!userId) {
+      //     throw new Error('ユーザーが登録されていません。先にログインしてください。');
+      //   }
 
       let response;
       if (editId) {
@@ -96,9 +96,12 @@ function TrainingForm() {
           },
           body: JSON.stringify({
             ...formData,
-          //   user_id: userId // ユーザーIDはサーバー側で自動でセットする（ユーザ－側からの変更不可にするべき）
+            //   user_id: userId // ユーザーIDはサーバー側で自動でセットする（ユーザ－側からの変更不可にするべき）
           })
         });
+        const id = response.data.id;
+        // 結果ページに遷移
+        navigate(`/result/${id}`);
       }
 
       if (!response.ok) {
@@ -108,7 +111,7 @@ function TrainingForm() {
       const data = await response.json();
       setAiResponse(data.ai_response);
       setSuccess(true);
-      
+
     } catch (err) {
       setError(err.message || 'エラーが発生しました');
     } finally {
@@ -119,39 +122,39 @@ function TrainingForm() {
   // 編集用の関数
   const handleEdit = (item) => {
     setFormData({
-        name: item.name,
-        exercises: item.exercises,
-        goal: item.goal,
-        frequency: item.frequency,
-        start_date: item.start_date,
-        end_date: item.end_date,
+      name: item.name,
+      exercises: item.exercises,
+      goal: item.goal,
+      frequency: item.frequency,
+      start_date: item.start_date,
+      end_date: item.end_date,
     });
     // 編集時は何かフラグを立てて、submit時にPUT/POSTを切り替える実装もおすすめです
     setEditId(item.id); // 編集中のIDをセットして編集モードに
     handleSubmit();
   };
-    
+
   // 削除用の関数
-    const handleDelete = async (id) => {
-        if (!window.confirm('本当に削除しますか？')) return;
-        try {
-            setLoading(true);
-            setError('');
-            const res = await fetch(`/api/training/${id}/`, { method: 'DELETE' });
-            if (!res.ok) throw new Error('削除に失敗しました');
-            setSuccess(true);
-            // 削除後に一覧を再取得
-            setTrainings(trainings.filter((t) => t.id !== id));
-        } catch (err) {
-            setError(err.message || '削除時にエラーが発生しました');
-        } finally {
-            setLoading(false);
-        }
-    };
+  const handleDelete = async (id) => {
+    if (!window.confirm('本当に削除しますか？')) return;
+    try {
+      setLoading(true);
+      setError('');
+      const res = await fetch(`/api/training/${id}/`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('削除に失敗しました');
+      setSuccess(true);
+      // 削除後に一覧を再取得
+      setTrainings(trainings.filter((t) => t.id !== id));
+    } catch (err) {
+      setError(err.message || '削除時にエラーが発生しました');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="container mx-auto p-6 max-w-4xl">
-        
+
       {/* 一覧表示 */}
       <div className="mt-10">
         <h2 className="text-xl font-bold mb-2">一覧・変更・削除のテスト</h2>
@@ -161,7 +164,7 @@ function TrainingForm() {
               <th className="border px-4 py-2">ID</th>
               <th className="border px-4 py-2">プラン名</th>
               <th className="border px-4 py-2">目的</th>
-                <th className="border px-4 py-2">運動内容</th>
+              <th className="border px-4 py-2">運動内容</th>
               <th className="border px-4 py-2">頻度</th>
               <th className="border px-4 py-2">スタート日</th>
               <th className="border px-4 py-2">終了日</th>
@@ -184,16 +187,16 @@ function TrainingForm() {
                   <td className="border px-4 py-2">{t.end_date}</td>
                   <td className="border px-4 py-2">
                     <button
-                        className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-1 px-3 rounded mr-2"
-                        onClick={() => handleEdit(t)}
+                      className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-1 px-3 rounded mr-2"
+                      onClick={() => handleEdit(t)}
                     >
-                        変更
+                      変更
                     </button>
                     <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
-                        onClick={() => handleDelete(t.id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+                      onClick={() => handleDelete(t.id)}
                     >
-                        削除
+                      削除
                     </button>
                   </td>
                 </tr>
@@ -206,7 +209,7 @@ function TrainingForm() {
       <hr />
 
       {/* 新規作成 */}
-      <h1 className="text-3xl font-bold mb-8 text-center">トレーニングプラン{ editId ? '変更' : '新規作成'}test</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">トレーニングプラン{editId ? '変更' : '新規作成'}test</h1>
 
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
