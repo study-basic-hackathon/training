@@ -64,12 +64,17 @@ def generate_training_plan(data: dict) -> list:
     print("AIの返答:", response.text)
 
     # TODO:AIの応答を整形
+    cleaned_text = clean_json_response(response.text)
+    print("🧹 整形後のテキスト:\n", cleaned_text)
 
-    # TODO:AIの応答をJSONとしてパース
-    
-    # TODO:パースしたものを返す
-    
-    # 今は仮に何か応答を返しておきます。
-    return [{ "date": "2025-07-01",
-             "exercise": "仮の応答です。/backend/api/services/chatgpt.pyを編集してください。" }]
-
+    try:
+        # JSONとしてパース
+        parsed = json.loads(cleaned_text)
+        print("✅ パース成功:", parsed)
+        return parsed
+    except json.JSONDecodeError as e:
+        print("❌ JSONのパースに失敗:", e)
+        return [{
+            "date": "2025-07-01",
+            "exercise": "Geminiの返答のパースに失敗しました。"
+        }]
