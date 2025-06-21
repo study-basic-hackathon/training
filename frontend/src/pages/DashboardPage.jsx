@@ -41,6 +41,12 @@ const DashboardPage = () => {
         <h2>トレーニングプラン一覧</h2>
             
         <div>
+            <button
+                onClick={() => navigate('/create')}
+                className="new-plan-button"
+            >
+                新規作成
+            </button>
             {/* ★ カード形式のレイアウト ★ */}
             {data && data.length > 0 ? (
                 <div className="training-cards-container">
@@ -92,12 +98,6 @@ const DashboardPage = () => {
                 <p className="no-training-message">トレーニングプランがありません。新規作成しましょう！</p>
             )}
 
-            <button
-                onClick={() => navigate('/create')}
-                className="new-plan-button"
-            >
-                新規作成
-            </button>
         </div>
     </>)
 }
