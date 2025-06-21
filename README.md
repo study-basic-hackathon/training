@@ -8,6 +8,19 @@
 `npm install`  
 `npm run build`  
 
+## 手順1.5　Gemini API キーを設定する
+- 1.  **Google AI Studio で Gemini API キーを取得する:**
+      * [Google AI Studio](https://aistudio.google.com/) にアクセスし、Googleアカウントでログインします。
+      * 左側のサイドバーにある「**Get API key**」または「**API keys**」をクリックし、新しいAPIキーを生成してコピーします。
+      * [Image of Google AI Studio APIキー取得画面]
+- 2.  **`.env` ファイルを作成し、APIキーを設定する:**
+      * `backend` ディレクトリの直下に、`.env` という名前の新しいファイルを作成します。
+      * そのファイルに、コピーしたAPIキーを以下の形式で記述します。
+        ```
+        GENAI_API_KEY='ここに取得したGemini APIキーを貼り付けます'
+        ```
+      * **この `.env` ファイルはGitのバージョン管理から除外されていること（`.gitignore` に `/.env` が含まれていること）を必ず確認してください。** APIキーは機密情報です。
+
 ## 手順2a: データベースのマイグレーション
 [バックエンド] (プロジェクトルート)/backend　で  
 もし **db.sqlite3** というファイルがあったら削除する（しなくてもいけるときもあるけど一応）。  
