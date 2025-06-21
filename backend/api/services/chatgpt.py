@@ -7,7 +7,7 @@ import re
 
 # .env 読み込み
 load_dotenv()
-api_key = os.getenv(GOOGLE_API_KEY)
+api_key = os.getenv("GOOGLE_API_KEY")
 if not api_key:
     raise ValueError("GEMINI_API_KEY が設定されていません。.envファイルを確認してください。")
 # APIキー設定
@@ -69,22 +69,22 @@ def generate_training_plan(data: dict) -> list:
     cleaned_response = clean_json_response(response.text)
     print("整形後の応答:", cleaned_response)
 
-    # # TODO:AIの応答をJSONとしてパース
-    # try:
-    #     # JSON文字列をPythonのリスト/辞書に変換
-    #     parsed_plan = json.loads(cleaned_response)
-    #     print("パース済みプラン:", parsed_plan)
-    # except json.JSONDecodeError as e:
-    #     print(f"JSONパースエラー: {e}")
-    #     print(f"パースに失敗した文字列:\n{cleaned_response}")
-    #     # エラーが発生した場合は、フロントエンドにエラーを伝えるか、空のリストを返す
-    #     return [{"date": "Error", "exercise": f"JSONパースエラーが発生しました: {e}"}]
-    # except Exception as e:
-    #     print(f"予期せぬエラー: {e}")
-    #     return [{"date": "Error", "exercise": f"予期せぬエラーが発生しました: {e}"}]
-    # # TODO:パースしたものを返す
-    # return parsed_plan
+    # TODO:AIの応答をJSONとしてパース
+    try:
+        # JSON文字列をPythonのリスト/辞書に変換
+        parsed_plan = json.loads(cleaned_response)
+        print("パース済みプラン:", parsed_plan)
+    except json.JSONDecodeError as e:
+        print(f"JSONパースエラー: {e}")
+        print(f"パースに失敗した文字列:\n{cleaned_response}")
+        # エラーが発生した場合は、フロントエンドにエラーを伝えるか、空のリストを返す
+        return [{"date": "Error", "exercise": f"JSONパースエラーが発生しました: {e}"}]
+    except Exception as e:
+        print(f"予期せぬエラー: {e}")
+        return [{"date": "Error", "exercise": f"予期せぬエラーが発生しました: {e}"}]
+    # TODO:パースしたものを返す
+    return parsed_plan
     # 今は仮に何か応答を返しておきます。
-    return [{ "date": "2025-07-01",
-             "exercise": "仮の応答です。/backend/api/services/chatgpt.pyを編集してください。" }]
+    # return [{ "date": "2025-07-01",
+    #          "exercise": "仮の応答です。/backend/api/services/chatgpt.pyを編集してください。" }]
 
