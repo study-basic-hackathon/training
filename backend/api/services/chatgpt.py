@@ -6,7 +6,7 @@ from .prompt_builder import build_prompt
 
 # .env 読み込み
 load_dotenv()
-api_key = os.getenv("GENAI_API_KEY")
+api_key = os.getenv("")
 
 # APIキー設定
 genai.configure(api_key=api_key)
