@@ -34,11 +34,11 @@ class TrainingViewSet(viewsets.ModelViewSet):
 
 
         # しょう作成したやつをAIで生成した内容を保存する
-        # from api.services.chatgpt import generate_training_plan
-        #  ai_generated_content_for_save = generate_training_plan(serializer.validated_data)
-        ai_generated_content_for_save = [{"date": "2025-06-01","exercise": "<ul><li>ウォーミングアップ 5分</li><li>ジョギング 20分</li><li>クールダウン 5分</li></ul>"},
-                                        {"date": "2025-06-02","exercise": "<ul><li>筋力トレーニング：スクワット 3セット</li><li>プッシュアップ 3セット</li><li>プランク 3セット</li></ul>"}
-                                        ]
+        from api.services.chatgpt import generate_training_plan
+        ai_generated_content_for_save = generate_training_plan(serializer.validated_data)
+        # ai_generated_content_for_save = [{"date": "2025-06-01","exercise": "<ul><li>ウォーミングアップ 5分</li><li>ジョギング 20分</li><li>クールダウン 5分</li></ul>"},
+        #                                 {"date": "2025-06-02","exercise": "<ul><li>筋力トレーニング：スクワット 3セット</li><li>プッシュアップ 3セット</li><li>プランク 3セット</li></ul>"}
+        #                                 ]
         serializer.validated_data['plan'] = ai_generated_content_for_save
         instance = serializer.save()
         return instance
