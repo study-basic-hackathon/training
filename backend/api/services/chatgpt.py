@@ -7,9 +7,9 @@ import re
 
 # .env 読み込み
 load_dotenv()
-api_key = os.getenv("GOOGLE_API_KEY")
+api_key = os.getenv("GENAI_API_KEY")
 if not api_key:
-    raise ValueError("GEMINI_API_KEY が設定されていません。.envファイルを確認してください。")
+    raise ValueError("GENAI_API_KEY が設定されていません。.envファイルを確認してください。")
 # APIキー設定
 genai.configure(api_key=api_key)
 
