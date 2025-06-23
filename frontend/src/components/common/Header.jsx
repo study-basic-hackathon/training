@@ -5,13 +5,25 @@ import { NavLink } from 'react-router-dom'; // ★ここをLinkからNavLinkに�
 const Header = () => {
     return (<>
         <div>
-            <hr />
+            {/* メインの見出し */}
+            <h1 style={{
+                textAlign: 'center',
+                color: '#4488fb', // 濃い目のグレー
+                fontSize: '2.5em', // 大きめのフォントサイズ
+                fontWeight: 'bold', // 太字
+                marginBottom: '15px',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.1)' // 軽い影
+            }}>
+                TRAINING JOURNEY
+            </h1>
+
+            <hr style={{ borderColor: '#a0aec0', margin: '15px auto', width: '80%' }} /> {/* 見出しとナビゲーションの間の区切り線 */}
+            
             <p>(HEADER)</p>
             {/* 各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置) */}
             <nav style={{ width: '100%', padding: '2px', backgroundColor: '#ccc' }}>
                 <p style={{ color: '#333', margin: 0, padding: 0 }}>各ページへのナビゲーションリンク (開発中はアクセスしやすいように設置)</p>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
-                    <NavLink to="/" end>Login (Top)</NavLink>
                         {/* end プロパティ: ルートパス (/) の NavLink には end プロパティを追加しています。これは exact プロパティの新しい名称で、パスが完全に一致する場合にのみ active クラスを適用するために使います。これがないと、/dashboard にいる時でも / のリンクがアクティブになってしまう可能性があります。 */}
                     <NavLink to="/dashboard">Dashboard</NavLink>
                     <NavLink to="/create">Create Plan</NavLink>
@@ -27,7 +39,6 @@ const Header = () => {
             </nav>
 
             <p>(HEADERおわり)</p>
-            <hr />
         </div>
     </>);
 };

@@ -99,14 +99,11 @@ export default function PlanCreatePage() {
             {/* 目的 */}
             <fieldset>
                 <legend className="font-semibold text-end">トレーニングの目的は何ですか？</legend>
-                <select name="trainingGoal" required className="w-full border rounded p-2">
-                    <option value="">選択してください</option>
-                    <option value="buildMuscle">筋肉を増やす</option>
-                    <option value="loseWeight">減量する</option>
-                    <option value="increaseStamina">持久力を高める</option>
-                    <option value="rehab">リハビリ・回復</option>
-                    <option value="generalHealth">健康維持</option>
-                </select>
+                <input name="trainingGoal" 
+                    required 
+                    className="w-full border rounded p-2" 
+                    placeholder="例：筋肉を増やす/ 減量する / 持久力を高める / リハビリ・回復 / 健康維持など"
+                />
             </fieldset>
 
             {/* 器具 */}
@@ -124,7 +121,7 @@ export default function PlanCreatePage() {
 
             {/* 時間 */}
             <fieldset>
-                <legend className="font-semibold text-end">1回のトレーニング時間</legend>
+                <legend className="font-semibold text-end">一日のトレーニング時間</legend>
                 <select name="sessionLength" className="w-full border rounded p-2">
                     <option value="">選択してください</option>
                     <option value="15">15分</option>
@@ -159,8 +156,12 @@ export default function PlanCreatePage() {
 
             {/* トレーニング日 */}
             <fieldset>
-                <legend className="font-semibold text-end">週に何回トレーニングを行いますか？</legend>
-                <input name="frequency" required className="w-full border rounded p-2" />
+                <legend className="font-semibold text-end">どのくらいの頻度でトレーニングを行いますか？</legend>
+                <input name="frequency" 
+                    required 
+                    className="w-full border rounded p-2"
+                    placeholder="例：週3回 / 毎日 / 月曜・水曜・金曜など"
+                />
             </fieldset>
 
             {/* 実施期間 */}

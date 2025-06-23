@@ -53,7 +53,7 @@
 
 /* 各トレーニングカード */
 .training-card {
-    background-color: #f8f8f8; /* 目に優しいオフホワイト系の背景色 */
+    background-color: #bababa; /* 目に優しいオフホワイト系の背景色 */
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     padding: 25px; /* カード全体のパディングはゆとりを持たせる */

@@ -40,3 +40,26 @@ fieldset {
 .datekikan {
     padding-right: inherit;
 }
+
+.bg-green-600 {
+    margin-left: auto;
+    padding: 12px 25px;
+    background-color: #007bff;
+
+
+    margin-top: 50px;
+}
+
+.space-y-4{
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #bababa;
+    color: black;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    border-radius: 11px;
+    padding: 31px;
+}
+
+.w-full {
+    width: 100%;
+}

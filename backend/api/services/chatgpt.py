@@ -2,7 +2,7 @@ import os
 import json # JSONのパースとエラーハンドリングのために追加
 import google.generativeai as genai
 from dotenv import load_dotenv
-from .prompt_builder import build_prompt
+from .prompt_builder_v2 import build_prompt
 import re
 
 # .env 読み込み
@@ -40,18 +40,6 @@ def clean_json_response(response_text):
 
 # TODO: ここからAIにトレーニングプランを生成させる関数を定義します。
 def generate_training_plan(data: dict) -> list:
-    """
-    フロントから渡される引数の例:
-    data = {
-        "name": "3ヶ月ダイエット",
-        "exercises": ランニング", "水泳", // 配列ではなく、何でもOKのインプットにしました。
-        "goal": "やせる",
-        "frequency": "月", "水", "金", // 配列ではなく、曜日でも「週2回」でも何でもOKにしました
-        "start_date": "2025-05-29",
-        "end_date": "2025-08-29"
-    }
-    """
-    
     # プロンプト生成
     prompt = build_prompt(data)
     print(prompt)
